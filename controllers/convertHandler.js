@@ -1,21 +1,21 @@
 function ConvertHandler() {
   
   this.getNum = function(input) {
-    const numRegex = /^[^a-zA-Z]*/
+     const result = input.match(/^[^a-zA-Z]+/); // Get everything before letters
 
-    const match = input.match(numRegex)[0]
+  if (!result) return 1; // No number part = default to 1
 
-    if(match === "") return 1;
+  const numStr = result[0];
 
-    if ((match.match(/\//g) || []).length > 1) {
-      return 'invalid number';
-    }
+  if ((numStr.match(/\//g) || []).length > 1) {
+    return 'invalid number';
+  }
 
-    try {
-      return eval(match);
-    } catch {
-      return 'invalid number'
-    }
+  try {
+    return eval(numStr);
+  } catch {
+    return 'invalid number';
+  }
   };
   
   this.getUnit = function(input) {
