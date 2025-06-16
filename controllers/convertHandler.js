@@ -1,6 +1,8 @@
 function ConvertHandler() {
   
   this.getNum = function(input) {
+const trimmedInput = input.trim();
+
      const result = input.match(/^[^a-zA-Z]+/); // Get everything before letters
 
   if (!result) return 1; // No number part = default to 1
@@ -13,7 +15,7 @@ function ConvertHandler() {
 
   try {
     return eval(numStr);
-  } catch {
+  } catch (e) {
     return 'invalid number';
   }
   };
