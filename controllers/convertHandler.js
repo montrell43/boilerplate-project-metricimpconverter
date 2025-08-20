@@ -60,20 +60,39 @@ const trimmedInput = input.trim();
   };
   
   this.convert = function(initNum, initUnit) {
-     const galToL = 3.78541;
+  const galToL = 3.78541;
   const lbsToKg = 0.453592;
   const miToKm = 1.60934;
 
+  let result;
+
   switch (initUnit) {
-    case 'gal': return parseFloat((initNum * galToL).toFixed(5));
-    case 'L': return parseFloat((initNum / galToL).toFixed(5));
-    case 'lbs': return parseFloat((initNum * lbsToKg).toFixed(5));
-    case 'kg': return parseFloat((initNum / lbsToKg).toFixed(5));
-    case 'mi': return parseFloat((initNum * miToKm).toFixed(5));
-    case 'km': return parseFloat((initNum / miToKm).toFixed(5));
-    default: return 'invalid unit';
+    case 'gal':
+      result = initNum * galToL;
+      break;
+    case 'L':
+      result = initNum / galToL;
+      break;
+    case 'lbs':
+      result = initNum * lbsToKg;
+      break;
+    case 'kg':
+      result = initNum / lbsToKg;
+      break;
+    case 'mi':
+      result = initNum * miToKm;
+      break;
+    case 'km':
+      result = initNum / miToKm;
+      break;
+    default:
+      return 'invalid unit';
   }
-  };
+
+  // Round to 5 decimal places
+  return Math.round(result * 100000) / 100000;
+};
+
   
   this.getString = function(initNum, initUnit, returnNum, returnUnit) {
      const initUnitFull = this.spellOutUnit(initUnit);
