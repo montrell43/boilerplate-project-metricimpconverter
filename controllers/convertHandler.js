@@ -21,7 +21,7 @@ const trimmedInput = input.trim();
   };
   
   this.getUnit = function(input) {
-    const unitRegex = /[a-zA-z]+$/;
+    const unitRegex = /[a-zA-Z]+$/;
     const match = input.match(unitRegex);
 
     if(!match) return 'invalid unit';
@@ -29,8 +29,10 @@ const trimmedInput = input.trim();
     const unit = match[0].toLowerCase();
 
     const validUnits = ['gal', 'l', 'mi', 'km', 'lbs', 'kg'];
+
+    if(!validUnits.includes(unit)) return 'invalid unit';
     
-    return validUnits.includes(unit) ? (unit === 'l' ? 'L' : unit) : 'invalid unit';
+    return unit === 'l' ? 'L' : unit; 
   };
   
   this.getReturnUnit = function(initUnit) {
