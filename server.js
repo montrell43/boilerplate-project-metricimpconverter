@@ -41,9 +41,18 @@ app.use(function(req, res, next) {
 });
 
 // FCC tester expects GET / to return { status: "unavailable" }
-app.get('/_api/get-tests', (req, res) => {
-  res.json({ status: "unavailable" });
+// FCC tester expects /_api/get-tests to return an array of tests
+app.get('/_api/get-tests', function(req, res) {
+  res.json(runner.testResults || []);
 });
+
+app.get('/_api/app-info', function(req, res) {
+  let appInfo = {
+    userAgent: req.get('User-Agent')
+  };
+  res.json(appInfo);
+});
+
 
 const port = process.env.PORT || 3000;
 
