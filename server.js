@@ -22,8 +22,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //Index page (static HTML)
 app.route('/')
   .get(function (req, res) {
+    if (req.headers.accept && req.headers.accept.includes('application/json')) {
+    res.json([]);
+  } else {
+    // Otherwise, serve your index.html for normal browser requests
     res.sendFile(process.cwd() + '/views/index.html');
-  });
+  }
+});
 
 //For FCC testing purposes
 fccTestingRoutes(app);
@@ -37,6 +42,7 @@ app.use(function(req, res, next) {
     .type('text')
     .send('Not Found');
 });
+
 
 const port = process.env.PORT || 3000;
 
